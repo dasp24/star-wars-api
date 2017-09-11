@@ -9,7 +9,7 @@ const {
 const root = 'http://swapi.co/api/';
 
 // 1) Fetch results from /people and log out an array of all the character's names. 
-const getListofPeople = fetch(`${root}people`)
+const getListofPeople = () => fetch(`${root}people`)
     .then((res) =>
         res.json()
     )
@@ -28,7 +28,7 @@ const getListofPeople = fetch(`${root}people`)
 
 // 2) Fetch results from /planets and log out the name of the planet with the longest orbital period.
 
-const findBiggestOrbitalPlanet = fetch(`${root}planets`)
+const findBiggestOrbitalPlanet = () => fetch(`${root}planets`)
     .then(res =>
         res.json()
     )
@@ -48,7 +48,7 @@ const findBiggestOrbitalPlanet = fetch(`${root}planets`)
 
 // Fetch results from /films and log out an array of all the director's names along with the films they
 // directed.
-const directorsAndTheirFilmes = fetch(`${root}films`)
+const directorsAndTheirFilmes = () => fetch(`${root}films`)
     .then(res => {
         return res.json();
     })
@@ -74,7 +74,7 @@ const directorsAndTheirFilmes = fetch(`${root}films`)
 // 4) Fetch results from /people/1 and log out the person's name and the vehicles they use (name and
 // model). Note: this will require fetching from /vehicles/:vehicleID
 
-const nameAndVehicles = fetch(`${root}people/1`)
+const nameAndVehicles = () => fetch(`${root}people/1`)
     .then(res => {
         let name;
         return res.json();

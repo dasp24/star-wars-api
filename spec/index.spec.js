@@ -20,7 +20,7 @@ const {
 describe('getListofPeople', function () {
     this.timeout(10000);
     it('returns the names of characters', (done) => {
-        getListofPeople.then((value) => {
+        getListofPeople().then((value) => {
             expect(value).to.be.an('array');
             expect(value).to.eql(['Luke Skywalker',
                 'C-3PO',
@@ -41,7 +41,7 @@ describe('getListofPeople', function () {
 describe('findBiggestOrbitalPlanet', function () {
     this.timeout(10000);
     it('finds the biggest planet and returns it', (done) => {
-        findBiggestOrbitalPlanet.then((value) => {
+        findBiggestOrbitalPlanet().then((value) => {
             expect(value).to.be.an('object');
             expect(value).to.eql({
                 name: 'Bespin',
@@ -55,8 +55,7 @@ describe('findBiggestOrbitalPlanet', function () {
 describe('findBiggestOrbitalPlanet', function () {
     this.timeout(10000);
     it('finds the biggest planet and returns it', (done) => {
-        findBiggestOrbitalPlanet.then((value) => {
-            expect(value).to.be.an('object');
+        findBiggestOrbitalPlanet().then((value) => {
             expect(value).to.eql({
                 name: 'Bespin',
                 orbitalPeriod: '5110'
@@ -69,7 +68,7 @@ describe('findBiggestOrbitalPlanet', function () {
 describe('directorsAndTheirFilmes', function () {
     this.timeout(10000);
     it('returns the directors with their films', (done) => {
-            directorsAndTheirFilmes.then((value) => {
+            directorsAndTheirFilmes().then((value) => {
                     expect(value).to.eql([{
                         name: 'George Lucas',
                         films: ['A New Hope',
@@ -95,7 +94,7 @@ describe('directorsAndTheirFilmes', function () {
 describe('nameAndVehicles', function () {
     this.timeout(10000);
     it('gets the name and returns the vehicles', (done) => {
-        nameAndVehicles.then((value) => {
+        nameAndVehicles().then((value) => {
             expect(value).to.eql( {name: 'Luke Skywalker',
             Vehicles:
              [ { name: 'Snowspeeder', model: 't-47 airspeeder' },

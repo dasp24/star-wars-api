@@ -70,6 +70,7 @@ describe('getFilms', () => {
     });
     it('returns an array of films for a specific director', () => {
         const director = 'George Lucas';
+        const director2 = 'peorge pucas';
         
         const results = [{
             title: 'A New Hope',
@@ -79,5 +80,6 @@ describe('getFilms', () => {
             director: 'George Lucas'
         }];
         expect(getFilms(results,director)).to.eql([ 'A New Hope', 'Return of the Jedi' ]);
+        expect(getFilms(results,director2)).to.eql([]);
     });
 });

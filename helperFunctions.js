@@ -1,4 +1,4 @@
- let orbitalPeriod = 0;
+let orbitalPeriod = 0;
  const findBiggestOribitalPeriod = (planet) => {
      if (Number(planet.orbital_period) > orbitalPeriod) {
          orbitalPeriod = Number(planet.orbital_period);

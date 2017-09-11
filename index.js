@@ -1,5 +1,6 @@
 const fetch = require('node-fetch');
 
+const {findBiggestOribitalPeriod, wantedPlanetDetails, getDirectors, getFilms} = require('./helperFunctions')
 const root = 'http://swapi.co/api/';
 
 // 1) Fetch results from /people and log out an array of all the character's names. 
@@ -12,7 +13,7 @@ fetch(`${root}people`)
             return person.name;
         });
     })
-    .then( names =>{
+    .then( names => {
         console.log(names);
     })
     .catch( error => {
@@ -20,25 +21,15 @@ fetch(`${root}people`)
     });
 
 // 2) Fetch results from /planets and log out the name of the planet with the longest orbital period.
+
 fetch(`${root}planets`)
     .then( res =>
          res.json()
     )
     .then(data => {
         // grab the biggest orbital period
-        let orbitalPeriod = 0;
-        data.results.forEach((planet) => {
-            if (Number(planet.orbital_period) > orbitalPeriod) {
-                orbitalPeriod = Number(planet.orbital_period)
-            }
-        });
-        return data.results.reduce((acc, planet) => {
-            if (Number(planet.orbital_period) === orbitalPeriod) return {
-                name: planet.name,
-                orbitalPeriod: planet.orbital_period
-            };
-            return acc;
-        }, {});
+        data.results.forEach(findBiggestOribitalPeriod);
+        return data.results.reduce(wantedPlanetDetails, {});
 
     })
     .then(planet => {
@@ -55,27 +46,13 @@ fetch(`${root}films`)
         return res.json();
     })
     .then(data => {
-
         // so i need to grab all the directors and put them in an array
-        const directors = data.results.reduce((acc, film) => {
-            if (!acc.includes(film.director)) acc.push(film.director);
-            return acc;
-        }, []);
-
-        // helper function to get all films for specific director
-        const getFilms = director => {
-            return data.results.reduce((acc, film) => {
-                if (film.director === director) {
-                    acc.push(film.title);
-                }
-                return acc;
-            }, []);
-        }
+        const directors = data.results.reduce(getDirectors, []);
         // return result is desired format
         return directors.map((director) => {
             return {
                 name: director,
-                films: getFilms(director)
+                films: getFilms(data.results,director)
             };
         });
     })
@@ -121,3 +98,5 @@ fetch(`${root}people/1`)
     .catch(error => {
         console.log('Requestfailed', error);
     });
+
+    // module.exports = {findBiggestOribitalPeriod, wantedPlanetDetails, getDirectors, getFilms}

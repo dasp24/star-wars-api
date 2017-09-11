@@ -82,4 +82,15 @@ describe('getFilms', () => {
         expect(getFilms(results,director)).to.eql([ 'A New Hope', 'Return of the Jedi' ]);
         expect(getFilms(results,director2)).to.eql([]);
     });
+    it('returns an empty array if director isn\'t there', () => {
+        const director = 'peorge pucas';
+        const results = [{
+            title: 'A New Hope',
+            director: 'George Lucas'
+        },{
+            title: 'Return of the Jedi',
+            director: 'George Lucas'
+        }];
+        expect(getFilms(results,director)).to.eql([]);
+    });
 });

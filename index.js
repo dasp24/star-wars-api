@@ -4,27 +4,27 @@ const root = 'http://swapi.co/api/';
 
 // 1) Fetch results from /people and log out an array of all the character's names. 
 fetch(`${root}people`)
-    .then(function (res) {
-        return res.json();
-    })
-    .then(function (data) {
+    .then( (res) =>
+         res.json()
+    )
+    .then( (data) => {
         return data.results.map((person) => {
             return person.name;
         });
     })
-    .then(function (names) {
+    .then( names =>{
         console.log(names);
     })
-    .catch(function (error) {
-        console.log('Requestfailed', error)
+    .catch( error => {
+        console.log('Requestfailed', error);
     });
 
 // 2) Fetch results from /planets and log out the name of the planet with the longest orbital period.
 fetch(`${root}planets`)
-    .then(function (res) {
-        return res.json();
-    })
-    .then(function (data) {
+    .then( res =>
+         res.json()
+    )
+    .then(data => {
         // grab the biggest orbital period
         let orbitalPeriod = 0;
         data.results.forEach((planet) => {
@@ -41,29 +41,29 @@ fetch(`${root}planets`)
         }, {});
 
     })
-    .then(function (planet) {
+    .then(planet => {
         console.log(planet);
     })
-    .catch(function (error) {
+    .catch(error => {
         console.log('Requestfailed', error);
     });
 
 // Fetch results from /films and log out an array of all the director's names along with the films they
 // directed.
 fetch(`${root}films`)
-    .then(function (res) {
+    .then(res => {
         return res.json();
     })
-    .then(function (data) {
+    .then(data => {
 
         // so i need to grab all the directors and put them in an array
         const directors = data.results.reduce((acc, film) => {
-            if (!acc.includes(film.director)) acc.push(film.director)
+            if (!acc.includes(film.director)) acc.push(film.director);
             return acc;
         }, []);
 
         // helper function to get all films for specific director
-        function getFilms(director) {
+        const getFilms = director => {
             return data.results.reduce((acc, film) => {
                 if (film.director === director) {
                     acc.push(film.title);
@@ -79,18 +79,18 @@ fetch(`${root}films`)
             };
         });
     })
-    .then(function (directors) {
-        console.log(directors)
+    .then(directors => {
+        console.log(directors);
     })
-    .catch(function (error) {
-        console.log('Requestfailed', error)
+    .catch(error => {
+        console.log('Requestfailed', error);
     });
 
 // 4) Fetch results from /people/1 and log out the person's name and the vehicles they use (name and
 // model). Note: this will require fetching from /vehicles/:vehicleID
 
 fetch(`${root}people/1`)
-    .then(function (res) {
+    .then(res => {
         let name;
         return res.json();
     })
@@ -99,9 +99,9 @@ fetch(`${root}people/1`)
         const vehicleAddresses = data.vehicles;
         const vehicleInfo = Promise.all(vehicleAddresses.map(address => {
             return fetch(address)
-                .then(function (res) {
-                    return res.json();
-                })
+                .then(res => 
+                     res.json()
+                )
                 .then(vehicle => {
                     return {
                         name: vehicle.name,
@@ -118,6 +118,6 @@ fetch(`${root}people/1`)
             Vehicles: vehicleInfo
         })
     )
-    .catch(function (error) {
+    .catch(error => {
         console.log('Requestfailed', error);
     });

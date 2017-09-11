@@ -40,10 +40,44 @@ describe('getDirectors', () => {
     it('exists', () => {
         expect(getDirectors).to.be.a('function');
     });
+
+    it('returns an array of directors', () => {
+        const data = [{
+            title: 'A New Hope',
+            director: 'George Lucas'
+        },{
+            title: 'Return of the Jedi',
+            director: 'Richard Marquand'
+        }];
+        expect(data.reduce(getDirectors,[])).to.eql(['George Lucas','Richard Marquand']);
+    });
+
+    it('doesn\'t add same director twice', () => {
+        const data = [{
+            title: 'A New Hope',
+            director: 'George Lucas'
+        },{
+            title: 'Return of the Jedi',
+            director: 'George Lucas'
+        }];
+        expect(data.reduce(getDirectors,[])).to.eql(['George Lucas']);
+    });
 });
 
 describe('getFilms', () => {
     it('exists', () => {
         expect(getFilms).to.be.a('function');
+    });
+    it('returns an array of films for a specific director', () => {
+        const director = 'George Lucas';
+        
+        const results = [{
+            title: 'A New Hope',
+            director: 'George Lucas'
+        },{
+            title: 'Return of the Jedi',
+            director: 'George Lucas'
+        }];
+        expect(getFilms(results,director)).to.eql([ 'A New Hope', 'Return of the Jedi' ]);
     });
 });

@@ -20,6 +20,20 @@ describe('wantedPlanetDetails', () => {
     it('exists', () => {
         expect(wantedPlanetDetails).to.be.a('function');
     });
+    it('returns desired planet in correct format', () => {
+    
+        const data = [{
+            name: 'Alderaan',
+            orbital_period: '364'
+        }, {
+            name: 'Hoth',
+            orbital_period: '549'
+        }];
+
+        data.forEach(findBiggestOribitalPeriod);
+
+        expect(data.reduce(wantedPlanetDetails,{})).to.eql({name:'Hoth',orbitalPeriod:'549'});
+    });
 });
 
 describe('getDirectors', () => {
